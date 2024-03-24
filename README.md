@@ -4,7 +4,7 @@ Support the xlsx cells tha have formulas.
 
 # Usage
 - Download the release version , use the terminal. (Recommend)
-
+```
 USAGE:
     xlsx2csv [OPTIONS] <input> [output]
 
@@ -16,7 +16,7 @@ OPTIONS:
     -h, --help              Print help information
     -s, --sheet <sheet>     Sheet name (optional)
     -u, --use-sheet-name    Use sheet name as output (optional)
-
+```
 Example:
 on windows, make a .bat file, copy the code below, you can change "test.xlsx" as you file name.
 ```bat
