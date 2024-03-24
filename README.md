@@ -21,6 +21,7 @@ Example:
 on windows, make a .bat file, copy the code below, you can change "test.xlsx" as you file name.
 ```bat
 @Echo Off
+:: Obtain administrator rights
 %1 mshta vbscript:createobject("shell.application").shellexecute("%~s0","::","","runas",1)(window.close)&exit
 cd /d %~dp0
 
@@ -40,5 +41,5 @@ MIT LICENSE
 
 Fell free to use the script. 
 
-If the script help you , fell free to give it a star.
+If the script helps you , fell free to give it a star.
 
