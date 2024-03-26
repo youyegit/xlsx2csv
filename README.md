@@ -13,9 +13,15 @@ ARGS:
     <output>    Output CSV file (optional). if no value , use sheet name as output
 
 OPTIONS:
-    -h, --help              Print help information
-    -s, --sheet <sheet>     Sheet name (optional)
-    -u, --use-sheet-name    Use sheet name as output (optional)
+
+    -h, --help                    Print help information
+    -i, --input <input>           Input XLSX file
+    -o, --output <output>         Output CSV file (optional). if no value , use sheet name as output
+    -s, --sheet <sheet>           Sheet name (optional)
+    -u, --use-sheet-name          Use sheet name as output (optional)
+    -a, --all-in-one              All sheets will be merged in one csv. All.csv as default outfile
+                                  name if --input is empty (optional)
+    -f, --first-line-only-once    When set all in one , you can set first_line_only_once (optional)
 ```
 Example:
 on windows, make a .bat file, copy the code below, you can change "test.xlsx" as you file name.
