@@ -74,7 +74,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let mut data: Vec<Vec<String>> = Vec::new();
         if let Ok(range) = workbook.worksheet_range(&sheet_name) {
             for row in range.rows() {
-                let csv_row: Vec<String> = row.iter().map(|cell| cell.to_string()).collect();
+                let csv_row: Vec<String> = row.iter().map(|cell| cell.to_string().trim().to_string()).collect();
                 data.push(csv_row);
             }
             all_data.insert(sheet_name.clone(), data.clone());
@@ -122,15 +122,15 @@ fn csv_writer(data: Vec<Vec<String>>, output_file_name: &str) -> Result<(), Box<
     let max_length = data.iter().map(|row| row.len()).max().unwrap_or(0);
 
     for csv_row in data {
-        if csv_row.iter().all(|cell| cell.is_empty()) {
+        if csv_row.iter().all(|cell| cell.trim().is_empty()) {
             continue;
         }
         let adjusted_row: Vec<_> = if csv_row.len() < max_length {
-            let mut adjusted_row = csv_row.clone();
+            let mut adjusted_row = csv_row.iter().map(|cell| cell.trim().to_string()).collect::<Vec<_>>();
             adjusted_row.resize(max_length, String::new());
             adjusted_row
         } else {
-            csv_row
+            csv_row.iter().map(|cell| cell.trim().to_string()).collect()
         };
 
         csv_writer.write_record(&adjusted_row)?;
@@ -157,7 +157,7 @@ fn csv_write_all(
                 continue;
             }
 
-            if csv_row.iter().all(|cell| cell.is_empty()) {
+            if csv_row.iter().all(|cell| cell.trim().is_empty()) {
                 continue;
             }
 
@@ -170,7 +170,7 @@ fn csv_write_all(
 
     let max_length = data_merged.iter().map(|row| row.len()).max().unwrap_or(0);
     for csv_row in data_merged {
-        if csv_row.iter().all(|cell| cell.is_empty()) {
+        if csv_row.iter().all(|cell| cell.trim().is_empty()) {
             continue;
         }
         let adjusted_row: Vec<_> = if csv_row.len() < max_length {
